@@ -10,7 +10,6 @@ D = Matrix([[1, 2], [3, 4], [5, 6]])
 
 
 # transpose
-
 assert A.transpose() == [[1, 3],[2, 4]]
 assert B.transpose() == [[1, 3, 0], [0, 4, 0], [-2, 5, 1]]
 assert C.transpose() == [[1, 4], [2, 5], [3, 6]]
@@ -31,5 +30,6 @@ assert B.scalar_multiply(0) == [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
 # matrix_multiply
 assert C.matrix_multiply([[2, 2], [2, 2]]) == [[16, 16], [18, 18], [14, 14]] 
-assert D.matrix_multiply([[1, 0, 1], [1, 1, 3], [2, -1, 0]]) == [[22, -2, 18], [16, -1, 14]] 
+assert D.matrix_multiply([[1, 0, 1], [1, 1, 3], [2, -1, 0]]) == [[22, -2, 18], [16, -1, 14]]
+
 
