@@ -55,7 +55,7 @@ class Matrix:
         copy_matrix = [[num for num in row] for row in self.elements]
         return Matrix(copy_matrix)
 
-    def minor_calc(self, col_index):
+    def calc_minor(self, col_index):
         minor_matrix = self.copy()
         for i in range(1,minor_matrix.num_cols):
             # print("element to be removed:", minor_matrix.elements[i][col_index])
@@ -86,7 +86,7 @@ class Matrix:
             for i in range(copy_matrix.num_cols):
                 coefficent_sign = (-1) ** i
                 coefficent = self.elements[0][i]
-                minor = self.minor_calc(i)
+                minor = self.calc_minor(i)
 
                 #print('i = ', i)
                 #print('Coefficient =', coefficent)
@@ -97,4 +97,112 @@ class Matrix:
                 cofactor = coefficent_sign * coefficent * minor.calc_determinant()
                 det += cofactor
             return det
+    
+    def find_pivot_row(self, col_index):
+        copy_matrix = self.copy()
+        for i in range(copy_matrix.num_cols): 
+            if copy_matrix.elements[i][col_index] != 0: 
+                return i
+    
+    def swap_rows(self, row_1_index, row_2_index):
+        copy_matrix = self.copy()
+        copy_matrix.elements[row_1_index], copy_matrix.elements[row_2_index] = copy_matrix.elements[row_2_index], copy_matrix.elements[row_1_index]
+        return copy_matrix 
+    
+    def first_nonzero_entry(self, row_index):
+        copy_matrix = self.copy() 
+        for i in range(copy_matrix.num_cols):
+            if copy_matrix.elements[row_index][i] != 0: 
+                nonzero = copy_matrix.elements[row_index][i]
+                return nonzero
 
+    def last_nonzero_entry(self, row_index):
+        copy_matrix = self.copy() 
+        for i in range(copy_matrix.num_cols)[::-1]:
+            if copy_matrix.elements[row_index][i] != 0: 
+                nonzero = copy_matrix.elements[row_index][i]
+                return nonzero 
+
+    def leading_entry_equals_one(self,row_index):
+        copy_matrix = self.copy()
+        divisor = copy_matrix.first_nonzero_entry(row_index)
+        for i in range(copy_matrix.num_cols): 
+            copy_matrix.elements[row_index][i] /= divisor
+        return copy_matrix
+    
+    def last_entry_equals_one(self,row_index):
+
+        copy_matrix = self.copy()
+        divisor = copy_matrix.last_nonzero_entry(row_index)
+        for i in range(copy_matrix.num_cols)[::-1]: 
+            copy_matrix.elements[row_index][i] /= divisor
+        return copy_matrix
+    
+    def clear_below(self, row_index):
+        copy_matrix = self.copy()
+        #print("Initial Matrix:")
+        #copy_matrix.print()
+        #print()
+        row = copy_matrix.elements[row_index]
+        for rows in range(row_index + 1,copy_matrix.num_rows):
+            subtractor = -(copy_matrix.first_nonzero_entry(rows))
+            sub_row = [elements * subtractor for elements in row]
+            for i in range(copy_matrix.num_cols):
+                #print("rows:", rows)
+                #print("i:",i)
+                #print("subtractor:", subtractor)
+                #print("sub row:", sub_row)
+                #print("current colum:" ,i)
+                copy_matrix.elements[rows][i] += sub_row[i]
+                #copy_matrix.print()
+                #print()
+        return copy_matrix
+    
+    def clear_above(self, row_index):
+        copy_matrix = self.copy()
+        #print("Initial Matrix:")
+        #copy_matrix.print()
+        #print()
+        row = copy_matrix.elements[row_index]
+        if row_index - 1 != 0:
+            for rows in range(copy_matrix.num_rows - 1)[:: -1]:
+                subtractor = -(copy_matrix.last_nonzero_entry(rows))
+                sub_row = [elements * subtractor for elements in row]
+                for i in range(copy_matrix.num_cols):
+                    #print("rows:", rows)
+                    #print("i:",i)
+                    #print("subtractor:", subtractor)
+                    #print("sub row:", sub_row)
+                    #print("current colum:" ,i)
+                    copy_matrix.elements[rows][i] += sub_row[i]
+                    #copy_matrix.print()
+                    #print()
+        else: 
+            for rows in range(0,1):
+                subtractor = -(copy_matrix.last_nonzero_entry(rows))
+                sub_row = [elements * subtractor for elements in row]
+                for i in range(copy_matrix.num_cols):
+                    #print("rows:", rows)
+                    #print("i:",i)
+                    #print("subtractor:", subtractor)
+                    #print("sub row:", sub_row)
+                    #print("current colum:" ,i)
+                    copy_matrix.elements[rows][i] += sub_row[i]
+                    #copy_matrix.print()
+                    #print()
+        return copy_matrix
+
+    
+A = Matrix([[1,4, -2],[7,-8,4], [5, 3, 2]])
+
+#A.clear_below(0).print()
+#print()
+#A.clear_below(0).leading_entry_equals_one(1).print()
+#print()
+#A.clear_below(0).leading_entry_equals_one(1).clear_below(1)#.print()
+#print()
+#A.clear_below(0).leading_entry_equals_one(1).clear_below(1)#.last_entry_equals_one(2).print()
+#print()
+#A.clear_below(0).leading_entry_equals_one(1).clear_below(1)#.last_entry_equals_one(2).clear_above(2).print()
+#print()
+A.clear_below(0).leading_entry_equals_one(1).clear_below(1).last_entry_equals_one(2).clear_above(2).clear_above(1).print()
