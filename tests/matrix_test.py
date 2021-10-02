@@ -40,3 +40,17 @@ assert C.calc_determinant() ==  "not a valid input, matrix must be square"
 assert D.calc_determinant() ==  "not a valid input, matrix must be square"
 assert E.calc_determinant() == 11
 assert F.calc_determinant() == -175
+
+
+
+
+#print()
+#A.clear_below(0).leading_entry_equals_one(1).print()
+#print()
+#A.clear_below(0).leading_entry_equals_one(1).clear_below(1)#.print()
+#print()
+#A.clear_below(0).leading_entry_equals_one(1).clear_below(1)#.leading_entry_equals_one(2).print()
+#print()
+#A.clear_below(0).leading_entry_equals_one(1).clear_below(1)#.leading_entry_equals_one(2).clear_above(2).print()
+#print()
+#A.clear_below(0).leading_entry_equals_one(1).clear_below(1).leading_entry_equals_one(2).clear_above(2).clear_above(1).print()

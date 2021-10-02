@@ -116,28 +116,13 @@ class Matrix:
                 nonzero = copy_matrix.elements[row_index][i]
                 return nonzero
 
-    def last_nonzero_entry(self, row_index):
-        copy_matrix = self.copy() 
-        for i in range(copy_matrix.num_cols)[::-1]:
-            if copy_matrix.elements[row_index][i] != 0: 
-                nonzero = copy_matrix.elements[row_index][i]
-                return nonzero 
-
     def leading_entry_equals_one(self,row_index):
         copy_matrix = self.copy()
         divisor = copy_matrix.first_nonzero_entry(row_index)
         for i in range(copy_matrix.num_cols): 
             copy_matrix.elements[row_index][i] /= divisor
         return copy_matrix
-    
-    def last_entry_equals_one(self,row_index):
-
-        copy_matrix = self.copy()
-        divisor = copy_matrix.last_nonzero_entry(row_index)
-        for i in range(copy_matrix.num_cols)[::-1]: 
-            copy_matrix.elements[row_index][i] /= divisor
-        return copy_matrix
-    
+        
     def clear_below(self, row_index):
         copy_matrix = self.copy()
         #print("Initial Matrix:")
@@ -164,45 +149,28 @@ class Matrix:
         #copy_matrix.print()
         #print()
         row = copy_matrix.elements[row_index]
-        if row_index - 1 != 0:
-            for rows in range(copy_matrix.num_rows - 1)[:: -1]:
-                subtractor = -(copy_matrix.last_nonzero_entry(rows))
-                sub_row = [elements * subtractor for elements in row]
-                for i in range(copy_matrix.num_cols):
-                    #print("rows:", rows)
-                    #print("i:",i)
-                    #print("subtractor:", subtractor)
-                    #print("sub row:", sub_row)
-                    #print("current colum:" ,i)
-                    copy_matrix.elements[rows][i] += sub_row[i]
-                    #copy_matrix.print()
-                    #print()
-        else: 
-            for rows in range(0,1):
-                subtractor = -(copy_matrix.last_nonzero_entry(rows))
-                sub_row = [elements * subtractor for elements in row]
-                for i in range(copy_matrix.num_cols):
-                    #print("rows:", rows)
-                    #print("i:",i)
-                    #print("subtractor:", subtractor)
-                    #print("sub row:", sub_row)
-                    #print("current colum:" ,i)
-                    copy_matrix.elements[rows][i] += sub_row[i]
-                    #copy_matrix.print()
-                    #print()
+        for rows in copy_matrix.elements[:row_index]:
+            subtractor = -rows[row_index]
+            sub_row = [elements * subtractor for elements in row] 
+            for i in range(copy_matrix.num_cols):
+                rows[i] += sub_row[i]
         return copy_matrix
 
-    
-A = Matrix([[1,4, -2],[7,-8,4], [5, 3, 2]])
-
-#A.clear_below(0).print()
-#print()
-#A.clear_below(0).leading_entry_equals_one(1).print()
-#print()
-#A.clear_below(0).leading_entry_equals_one(1).clear_below(1)#.print()
-#print()
-#A.clear_below(0).leading_entry_equals_one(1).clear_below(1)#.last_entry_equals_one(2).print()
-#print()
-#A.clear_below(0).leading_entry_equals_one(1).clear_below(1)#.last_entry_equals_one(2).clear_above(2).print()
-#print()
-A.clear_below(0).leading_entry_equals_one(1).clear_below(1).last_entry_equals_one(2).clear_above(2).clear_above(1).print()
+    def rref(self):
+        copy_matrix = self.copy()
+        row_index = 0 
+        for col_index in range(copy_matrix.num_cols):
+            pivot_row = copy_matrix.find_pivot_row(col_index)
+            if pivot_row != row_index: 
+                copy_matrix.swap_rows(pivot_row, row_index)
+            copy_matrix = copy_matrix.leading_entry_equals_one(row_index)
+            copy_matrix = copy_matrix.clear_below(row_index)
+            copy_matrix = copy_matrix.clear_above(row_index)
+            #copy_matrix.print()
+            #print()
+            row_index += 1
+        return copy_matrix
+        
+A = Matrix([[2, 1], [3,2], [-2,1], [1,1]])
+B = Matrix([[2, 4, 1, 1], [1, -2, 3, 2], [3, 7, -1, 0], [1, 4, -3, 1]])
+A.rref().print()
