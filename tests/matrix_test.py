@@ -8,6 +8,9 @@ C = Matrix([[1, 2, 3], [4, 5, 6]])
 D = Matrix([[1, 2], [3, 4], [5, 6]])
 E = Matrix([[1, 2, 3, 4], [0, 1, 0, 2], [1, 1, 0, 4], [3, 0, 2, 1]])
 F = Matrix([[1, 2, 3, 4, 5], [1, 1, 2, 0, 0], [-1, -4, 0, 2, 0], [2, 3, 5, 6, 0], [1, 1, 1, 3, 0]])
+G = Matrix([[2, 1], [3,2], [-2,1], [1,1]])
+H = Matrix([[2, 4, 1, 1], [1, -2, 3, 2], [3, 7, -1, 0], [1, 4, -3, 1]])
+I = Matrix([[2, 3, -2],[7, 2, 1],[2, 4, 1],[5, 6, 7]])
 
 
 # transpose
@@ -41,16 +44,13 @@ assert D.calc_determinant() ==  "not a valid input, matrix must be square"
 assert E.calc_determinant() == 11
 assert F.calc_determinant() == -175
 
-
-
-
-#print()
-#A.clear_below(0).leading_entry_equals_one(1).print()
-#print()
-#A.clear_below(0).leading_entry_equals_one(1).clear_below(1)#.print()
-#print()
-#A.clear_below(0).leading_entry_equals_one(1).clear_below(1)#.leading_entry_equals_one(2).print()
-#print()
-#A.clear_below(0).leading_entry_equals_one(1).clear_below(1)#.leading_entry_equals_one(2).clear_above(2).print()
-#print()
-#A.clear_below(0).leading_entry_equals_one(1).clear_below(1).leading_entry_equals_one(2).clear_above(2).clear_above(1).print()
+#rref
+assert A.rref().elements == [[1, 0], [0, 1]]
+assert B.rref().elements == [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+assert C.rref().elements == [[1, 0, -1], [0, 1, 2]]
+assert D.rref().elements == [[1, 0], [0, 1], [0, 0]]
+assert E.rref().elements == [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+assert F.rref().elements == [[1, 0, 0, 0, 0], [0, 1, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 1, 0], [0, 0, 0, 0, 1]]
+assert G.rref().elements == [[1, 0], [0, 1], [0, 0], [0, 0]]
+assert H.rref().elements == [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+assert I.rref().elements == [[1, 0, 0], [0, 1, 0], [0, 0, 1], [0, 0, 0]]

@@ -103,7 +103,7 @@ class Matrix:
         for i in range(copy_matrix.num_cols): 
             if copy_matrix.elements[i][col_index] != 0: 
                 return i
-    
+            
     def swap_rows(self, row_1_index, row_2_index):
         copy_matrix = self.copy()
         copy_matrix.elements[row_1_index], copy_matrix.elements[row_2_index] = copy_matrix.elements[row_2_index], copy_matrix.elements[row_1_index]
@@ -130,7 +130,7 @@ class Matrix:
         #print()
         row = copy_matrix.elements[row_index]
         for rows in range(row_index + 1,copy_matrix.num_rows):
-            subtractor = -(copy_matrix.first_nonzero_entry(rows))
+            subtractor = -(copy_matrix.elements[rows][row_index])
             sub_row = [elements * subtractor for elements in row]
             for i in range(copy_matrix.num_cols):
                 #print("rows:", rows)
@@ -160,17 +160,20 @@ class Matrix:
         copy_matrix = self.copy()
         row_index = 0 
         for col_index in range(copy_matrix.num_cols):
-            pivot_row = copy_matrix.find_pivot_row(col_index)
-            if pivot_row != row_index: 
-                copy_matrix.swap_rows(pivot_row, row_index)
-            copy_matrix = copy_matrix.leading_entry_equals_one(row_index)
-            copy_matrix = copy_matrix.clear_below(row_index)
-            copy_matrix = copy_matrix.clear_above(row_index)
-            #copy_matrix.print()
-            #print()
-            row_index += 1
+            if row_index < copy_matrix.num_rows:
+                #print("col_index", col_index)
+                #print("row_index", row_index)
+                pivot_row = copy_matrix.find_pivot_row(col_index)
+                #print("pivot_row", pivot_row)
+                if pivot_row != row_index: 
+                    copy_matrix.swap_rows(pivot_row, row_index)
+                    #print("pivot_row", pivot_row)
+                copy_matrix = copy_matrix.leading_entry_equals_one(row_index)
+                copy_matrix = copy_matrix.clear_below(row_index)
+                copy_matrix = copy_matrix.clear_above(row_index)
+                #copy_matrix.print()
+                #print()
+                row_index += 1
         return copy_matrix
         
-A = Matrix([[2, 1], [3,2], [-2,1], [1,1]])
-B = Matrix([[2, 4, 1, 1], [1, -2, 3, 2], [3, 7, -1, 0], [1, 4, -3, 1]])
-A.rref().print()
+        
