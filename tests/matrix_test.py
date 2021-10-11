@@ -54,3 +54,5 @@ assert F.rref().elements == [[1, 0, 0, 0, 0], [0, 1, 0, 0, 0], [0, 0, 1, 0, 0], 
 assert G.rref().elements == [[1, 0], [0, 1], [0, 0], [0, 0]]
 assert H.rref().elements == [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
 assert I.rref().elements == [[1, 0, 0], [0, 1, 0], [0, 0, 1], [0, 0, 0]]
+
+#inverse 

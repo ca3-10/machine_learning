@@ -9,6 +9,10 @@ class Matrix:
             for i in range(len(self.elements)):
                 print(self.elements[i])
     
+    def copy(self):
+        copy_matrix = [[num for num in row] for row in self.elements]
+        return Matrix(copy_matrix)
+    
     def transpose(self):
         transposed = []
         for i in range(self.num_cols):
@@ -51,10 +55,6 @@ class Matrix:
                     multi_matrix[i][j] += (self.elements[i][k] * times_matrix[k][j])
         return Matrix(multi_matrix)
 
-    def copy(self):
-        copy_matrix = [[num for num in row] for row in self.elements]
-        return Matrix(copy_matrix)
-
     def calc_minor(self, col_index):
         minor_matrix = self.copy()
         for i in range(1,minor_matrix.num_cols):
@@ -71,7 +71,6 @@ class Matrix:
         #print('Calling calc_determinant on the following matrix:')
         #self.print()
         #print()
-
         copy_matrix = self.copy()
 
         if copy_matrix.num_rows != copy_matrix.num_cols: 
@@ -103,6 +102,8 @@ class Matrix:
         for i in range(copy_matrix.num_cols): 
             if copy_matrix.elements[i][col_index] != 0: 
                 return i
+            if copy_matrix.elements[i][col_index] == 0: 
+                return False
             
     def swap_rows(self, row_1_index, row_2_index):
         copy_matrix = self.copy()
@@ -161,13 +162,12 @@ class Matrix:
         row_index = 0 
         for col_index in range(copy_matrix.num_cols):
             if row_index < copy_matrix.num_rows:
+                pivot_row = copy_matrix.find_pivot_row(col_index)
                 #print("col_index", col_index)
                 #print("row_index", row_index)
-                pivot_row = copy_matrix.find_pivot_row(col_index)
                 #print("pivot_row", pivot_row)
                 if pivot_row != row_index: 
                     copy_matrix.swap_rows(pivot_row, row_index)
-                    #print("pivot_row", pivot_row)
                 copy_matrix = copy_matrix.leading_entry_equals_one(row_index)
                 copy_matrix = copy_matrix.clear_below(row_index)
                 copy_matrix = copy_matrix.clear_above(row_index)
@@ -176,4 +176,49 @@ class Matrix:
                 row_index += 1
         return copy_matrix
         
-        
+    def identity(self):
+        identity_matrix = []
+        for i in range(self.num_rows): 
+            identity_matrix.append([])
+            for j in range(self.num_cols):
+                if i == j: 
+                    identity_matrix[i].append(1)
+                else: 
+                    identity_matrix[i].append(0)
+        return Matrix(identity_matrix)
+
+    def augment(self, id_matrix): 
+        copy_matrix = self.copy()
+        for i in range(copy_matrix.num_rows): 
+            for j in range(copy_matrix.num_cols): 
+                copy_matrix.elements[i].append(id_matrix.elements[i][j])
+        return copy_matrix
+    
+    def unaugment(self, aug_matrix):
+        inverse_matrix = []
+        for i in range(self.num_rows): 
+            inverse_matrix.append([])
+            for j in range(self.num_cols, aug_matrix.num_cols):
+                #print("i",i)
+                #print("j", j)
+                inverse_matrix[i].append(aug_matrix.elements[i][j])
+        return Matrix(inverse_matrix)
+
+    def inverse(self): 
+        copy_matrix = self.copy()
+        rref_matrix  = copy_matrix.rref()
+        identity_matrix = copy_matrix.identity()
+        augmented_matrix = copy_matrix.augment(identity_matrix).rref()
+        copy_matrix = copy_matrix.unaugment(augmented_matrix)
+        if rref_matrix.elements != identity_matrix.elements:
+            print("Matrix isn't invertible")
+        return copy_matrix
+
+    def check_regression(self, y_matrix): 
+        copy_matrix = self.copy()
+        copy_matrix = copy_matrix.transpose()
+        left_side = copy_matrix.matrix_multiply(y_matrix)
+        right_side = copy_matrix.matrix_multiply(self.elements)
+        right_side = right_side.inverse()
+        values = right_side.matrix_multiply(left_side.elements)
+        return values
