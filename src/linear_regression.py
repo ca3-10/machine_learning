@@ -19,11 +19,11 @@ class LinearRegressor:
         coeff_inverse = coeff_matrix.inverse()
         
         a_b_values = coeff_inverse.matrix_multiply(y_values_matrix.elements)
-        self.coefficents = [a_b_values.elements[i][0] for i in range(0, a_b_values.num_rows)]
+        self.coefficents = [round(a_b_values.elements[i][0], 5) for i in range(0, a_b_values.num_rows)]
         return self.coefficents
     
     def predict(self, x_value): 
-        y = self.coefficents[0] + (x_value * self.coefficents[1])
+        y = round(self.coefficents[0] + (x_value * self.coefficents[1]), 5)
         return y 
     
 

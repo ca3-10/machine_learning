@@ -117,6 +117,7 @@ class Matrix:
                 nonzero = copy_matrix.elements[row_index][i]
                 return nonzero
 
+
     def leading_entry_equals_one(self,row_index):
         copy_matrix = self.copy()
         divisor = copy_matrix.first_nonzero_entry(row_index)
@@ -213,7 +214,6 @@ class Matrix:
         identity_matrix = copy_matrix.identity()
         if copy_matrix.calc_determinant == 0:
             return Matrix([["Matrix isn't invertible"]])
-
         augmented_matrix = copy_matrix.augment(identity_matrix).rref()
         copy_matrix = copy_matrix.unaugment(augmented_matrix) 
         return copy_matrix
