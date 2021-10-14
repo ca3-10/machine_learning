@@ -103,7 +103,7 @@ class Matrix:
             if copy_matrix.elements[i][col_index] != 0: 
                 return i
             if copy_matrix.elements[i][col_index] == 0: 
-                return False
+                return False 
             
     def swap_rows(self, row_1_index, row_2_index):
         copy_matrix = self.copy()
@@ -160,6 +160,7 @@ class Matrix:
     def rref(self):
         copy_matrix = self.copy()
         row_index = 0 
+
         for col_index in range(copy_matrix.num_cols):
             if row_index < copy_matrix.num_rows:
                 pivot_row = copy_matrix.find_pivot_row(col_index)
@@ -205,13 +206,16 @@ class Matrix:
         return Matrix(inverse_matrix)
 
     def inverse(self): 
+        if self.num_rows != self.num_cols: 
+            return Matrix([["Only square matrices are invertible"]])
         copy_matrix = self.copy()
         rref_matrix  = copy_matrix.rref()
         identity_matrix = copy_matrix.identity()
+        if copy_matrix.calc_determinant == 0:
+            return Matrix([["Matrix isn't invertible"]])
+
         augmented_matrix = copy_matrix.augment(identity_matrix).rref()
-        copy_matrix = copy_matrix.unaugment(augmented_matrix)
-        if rref_matrix.elements != identity_matrix.elements:
-            print("Matrix isn't invertible")
+        copy_matrix = copy_matrix.unaugment(augmented_matrix) 
         return copy_matrix
 
     def check_regression(self, y_matrix): 
@@ -222,3 +226,4 @@ class Matrix:
         right_side = right_side.inverse()
         values = right_side.matrix_multiply(left_side.elements)
         return values
+

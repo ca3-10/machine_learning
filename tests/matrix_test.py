@@ -56,3 +56,8 @@ assert H.rref().elements == [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0,
 assert I.rref().elements == [[1, 0, 0], [0, 1, 0], [0, 0, 1], [0, 0, 0]]
 
 #inverse 
+
+assert A.inverse().elements == [[-2, 1], [1.5, -0.5]]
+assert B.inverse().elements == [[1, 0, 2], [-0.75, 0.25, -2.75], [0, 0, 1]]
+assert C.inverse().elements == [["Only square matrices are invertible"]]
+assert D.inverse().elements == [["Only square matrices are invertible"]]
