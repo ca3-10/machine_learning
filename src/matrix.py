@@ -117,7 +117,6 @@ class Matrix:
                 nonzero = copy_matrix.elements[row_index][i]
                 return nonzero
 
-
     def leading_entry_equals_one(self,row_index):
         copy_matrix = self.copy()
         divisor = copy_matrix.first_nonzero_entry(row_index)
@@ -218,12 +217,25 @@ class Matrix:
         copy_matrix = copy_matrix.unaugment(augmented_matrix) 
         return copy_matrix
 
-    def check_regression(self, y_matrix): 
+    def reff_det(self):
         copy_matrix = self.copy()
-        copy_matrix = copy_matrix.transpose()
-        left_side = copy_matrix.matrix_multiply(y_matrix)
-        right_side = copy_matrix.matrix_multiply(self.elements)
-        right_side = right_side.inverse()
-        values = right_side.matrix_multiply(left_side.elements)
-        return values
-
+        row_index = 0 
+        determinant = 1
+        if copy_matrix.num_rows != copy_matrix.num_cols: 
+            return "Cannot take the determinant of a nonsquare matrix"
+        if copy_matrix.rref() != copy_matrix.indentity(): 
+            return 0 
+        for col_index in range(copy_matrix.num_cols):
+            if row_index < copy_matrix.num_rows:
+                pivot_row = copy_matrix.find_pivot_row(col_index)
+                if pivot_row != row_index: 
+                    copy_matrix.swap_rows(pivot_row, row_index)
+                    determinant *= -1 
+                determinant *= copy_matrix.elements[row_index][col_index]
+                copy_matrix = copy_matrix.leading_entry_equals_one(row_index)
+                copy_matrix = copy_matrix.clear_below(row_index)
+                copy_matrix = copy_matrix.clear_above(row_index)
+                #copy_matrix.print()
+                #print()
+                row_index += 1
+        return determinant
