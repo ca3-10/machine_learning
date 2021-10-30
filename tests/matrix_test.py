@@ -11,7 +11,7 @@ F = Matrix([[1, 2, 3, 4, 5], [1, 1, 2, 0, 0], [-1, -4, 0, 2, 0], [2, 3, 5, 6, 0]
 G = Matrix([[2, 1], [3,2], [-2,1], [1,1]])
 H = Matrix([[2, 4, 1, 1], [1, -2, 3, 2], [3, 7, -1, 0], [1, 4, -3, 1]])
 I = Matrix([[2, 3, -2],[7, 2, 1],[2, 4, 1],[5, 6, 7]])
-
+J = Matrix([[7, 7, 8, 3, 2, 0, 6, 0 ,9 ,0 ,7 ,9], [7 ,9 ,4 ,7 ,2 ,9 ,0 ,1 ,5 ,9 ,7 ,3], [6 ,1 ,8 ,0 ,2 ,9 ,0 ,8 ,4 ,6 ,6 ,0], [9 ,9 ,3 ,5 ,6 ,5 ,3 ,4 ,8 ,8 ,7 ,3], [8 ,0 ,5 ,4 ,5 ,6 ,6 ,7 ,5 ,8 ,1, 9], [5 ,7 ,2 ,4 ,3 ,8 ,4 ,7 ,9 ,4 ,0 ,9], [1 ,2 ,7 ,8 ,4 ,1 ,3 ,8 ,8 ,6 ,6 ,8], [7 ,9 ,0 ,5 ,3 ,6 ,0 ,7 ,6 ,6 ,2 ,5], [3 ,8 ,9 ,7 ,9 ,4 ,9 ,6 ,9 ,6 ,2 ,2], [5 ,0 ,2 ,1 ,6 ,4 ,7 ,9 ,1 ,0 ,2 ,3], [0 ,9, 1, 5, 4, 1, 4, 7, 6 ,8 ,4 ,5], [6, 0, 9, 6, 3, 4, 7, 8, 5, 1, 9 ,1]])
 
 # transpose
 assert A.transpose().elements == [[1, 3],[2, 4]]
@@ -61,3 +61,11 @@ assert A.inverse().elements == [[-2, 1], [1.5, -0.5]]
 assert B.inverse().elements == [[1, 0, 2], [-0.75, 0.25, -2.75], [0, 0, 1]]
 assert C.inverse().elements == [["Only square matrices are invertible"]]
 assert D.inverse().elements == [["Only square matrices are invertible"]]
+
+#rref_determinant
+assert A.rref_det() == -2
+assert B.rref_det() ==  4
+assert C.rref_det() ==  "Cannot take the determinant of a nonsquare matrix"
+assert D.rref_det() ==  "Cannot take the determinant of a nonsquare matrix"
+assert F.rref_det() == -175
+assert J.rref_det() == 103776767478.00053

@@ -217,20 +217,19 @@ class Matrix:
         copy_matrix = copy_matrix.unaugment(augmented_matrix) 
         return copy_matrix
 
-    def reff_det(self):
+    def rref_det(self):
         copy_matrix = self.copy()
         row_index = 0 
+
         determinant = 1
         if copy_matrix.num_rows != copy_matrix.num_cols: 
             return "Cannot take the determinant of a nonsquare matrix"
-        if copy_matrix.rref() != copy_matrix.indentity(): 
-            return 0 
         for col_index in range(copy_matrix.num_cols):
             if row_index < copy_matrix.num_rows:
                 pivot_row = copy_matrix.find_pivot_row(col_index)
                 if pivot_row != row_index: 
                     copy_matrix.swap_rows(pivot_row, row_index)
-                    determinant *= -1 
+                    determinant *= 1 
                 determinant *= copy_matrix.elements[row_index][col_index]
                 copy_matrix = copy_matrix.leading_entry_equals_one(row_index)
                 copy_matrix = copy_matrix.clear_below(row_index)

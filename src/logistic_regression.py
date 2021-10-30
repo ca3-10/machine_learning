@@ -8,15 +8,22 @@ class LogisticRegressor:
     
     def fit(self, data): 
         data_matrix = Matrix(data)
+        coeffs = []
+
         for i in range(data_matrix.num_rows): 
             if data_matrix.elements[i][1] <= 0: 
                 return "y values must be greater than 0 and less than 1"
                 
-        y_values_matrix = Matrix([[math.log((1 / data_matrix.elements[i][1]) -1)] for i in range(0,data_matrix.num_rows)])
-
-        coeff_matrix = Matrix([[1, data_matrix.elements[i][0]] for i in range(0,data_matrix.num_rows)])
-
+        y_values_matrix = Matrix([[math.log((1 / data_matrix.elements[i][data_matrix.num_cols]) - 1)] for i in range(0,data_matrix.num_rows)])
+        
+        for i in range(data_matrix.num_rows): 
+            coeffs.append([1])
+            for j in range(0, data_matrix.num_cols - 1):
+                coeffs[i].append(data_matrix.elements[i][j])
+        
+        coeff_matrix = Matrix(coeffs)
         coeff_transpose = coeff_matrix.transpose()
+
         y_values_matrix = coeff_transpose.matrix_multiply(y_values_matrix.elements)
 
         coeff_matrix = coeff_transpose.matrix_multiply(coeff_matrix.elements)
@@ -31,3 +38,5 @@ class LogisticRegressor:
         return y
     
     
+A = LogisticRegressor()
+print(A.fit([(0, 0, 1), (1, 0, 2 ),(2, 0, 4), (4, 0, 8), (6, 0, 9), (0, 2, 2), (0, 4, 5), (0, 6, 7), (0, 8, 6)]))
