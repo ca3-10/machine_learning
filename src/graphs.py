@@ -30,7 +30,7 @@ class Graph:
             order.append(current_node)
             visited.update({current_node: True})
             queue.dequeue()
-            children = graph.get_children(current_node)
+            children = self.get_children(current_node)
 
             for child in children:
                 if child in visited:
@@ -49,8 +49,7 @@ class Graph:
             order.append(current_node)
             visited.update({current_node: True})
             stack.pop()
-            children = graph.get_children(current_node)
-            print(children)
+            children = self.get_children(current_node)
 
             for child in children:
                 if child in visited:
@@ -60,8 +59,5 @@ class Graph:
         return order 
 
         
-
-graph = Graph([(4, 0), (4, 8), (4, 6), (0, 8), (0, 2), (0, 3), (6, 3), (3, 2), (2, 3), (3, 1), (3, 5), (3, 9), (5, 7)])
-print(graph.depth_first(3))
 
         
