@@ -5,9 +5,10 @@ from matrix import Matrix
 
 class LinearRegressor: 
     
-    def fit(self, data): 
+    def fit(self, data, condition): 
         data_matrix = Matrix(data)
         coeffs = []
+
         
         y_values_matrix = Matrix([[data_matrix.elements[i][data_matrix.num_cols - 1]] for i in range(0,data_matrix.num_rows)])
         
@@ -16,28 +17,16 @@ class LinearRegressor:
             for j in range(0, data_matrix.num_cols - 1):
                 coeffs[i].append(data_matrix.elements[i][j])
         
-        coeff_matrix = Matrix(coeffs)
-        coeff_matrix.interaction_terms()
-
-        for k in range(coeff_matrix.num_rows):
-            for i in range(1,coeff_matrix.num_cols-2):
-                for j in range(0,coeff_matrix.num_cols-1):
-                        if i == i + j: 
+        og_coeff_len = len(coeffs[0])
+        if int_terms == True:
+            for rows in coeffs:
+                for m in range(1,og_coeff_len-1):
+                    for n in range(1,og_coeff_len-1):
+                        if m == m + n or m + n >= 5: 
                             continue
-                        coeff_copy.elements[k].append(coeff_matrix.elements[k][i]*coeff_matrix.elements[k][i+j])
+                        rows.append(rows[m]*rows[m+n])
         
-        coeff_copy.print()
-        for rows in coeff_matrix.elements:
-            for i in range(1,coeff_matrix.num_cols-2):
-                for j in range(0,coeff_matrix.num_cols-1):
-                    if i == i + j: 
-                        continue
-                        rows.append(rows[i]*rows[i+j])
-        
-
-
-
-         
+        coeff_matrix = Matrix(coeffs)
 
         coeff_transpose = coeff_matrix.transpose()
 
@@ -62,5 +51,5 @@ class LinearRegressor:
         return round(prediction, 5)
 
 
-D = LinearRegressor()
-D.fit([[1,2,3, 4, 1], [1,2,1, 0, 2], [1,2,2, 0, 4], [1,2,4, 0, 8],[1,2,0, 8, 6]])
+A = LinearRegressor()
+print(A.fit([(0, 0, 1), (1, 0, 2 ),(2, 0, 4), (4, 0, 8), (6, 0, 9), (0, 2, 2), (0, 4, 5), (0, 6, 7), (0, 8, 6), (2, 2, 1), (3, 4, 1)], T))

@@ -238,5 +238,3 @@ class Matrix:
                 #print()
                 row_index += 1
         return determinant
-
-   
