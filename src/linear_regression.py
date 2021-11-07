@@ -5,7 +5,7 @@ from matrix import Matrix
 
 class LinearRegressor: 
     
-    def fit(self, data, condition): 
+    def fit(self, data): 
         data_matrix = Matrix(data)
         coeffs = []
 
@@ -18,15 +18,15 @@ class LinearRegressor:
                 coeffs[i].append(data_matrix.elements[i][j])
         
         og_coeff_len = len(coeffs[0])
-        if int_terms == True:
-            for rows in coeffs:
-                for m in range(1,og_coeff_len-1):
-                    for n in range(1,og_coeff_len-1):
-                        if m == m + n or m + n >= 5: 
-                            continue
-                        rows.append(rows[m]*rows[m+n])
+        for rows in coeffs:
+            for m in range(1,og_coeff_len-1):
+                for n in range(1,og_coeff_len-1):
+                    if m == m + n or m + n >= 5: 
+                        continue
+                    rows.append(rows[m]*rows[m+n])
         
         coeff_matrix = Matrix(coeffs)
+        coeff_matrix.print()
 
         coeff_transpose = coeff_matrix.transpose()
 
@@ -52,4 +52,4 @@ class LinearRegressor:
 
 
 A = LinearRegressor()
-print(A.fit([(0, 0, 1), (1, 0, 2 ),(2, 0, 4), (4, 0, 8), (6, 0, 9), (0, 2, 2), (0, 4, 5), (0, 6, 7), (0, 8, 6), (2, 2, 1), (3, 4, 1)], T))
+print(A.fit([(0, 0, 1), (1, 0, 2 ),(2, 0, 4), (4, 0, 8), (6, 0, 9), (0, 2, 2), (0, 4, 5), (0, 6, 7), (0, 8, 6), (2, 2, 1), (3, 4, 1)]))
