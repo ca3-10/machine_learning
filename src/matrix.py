@@ -121,6 +121,8 @@ class Matrix:
         copy_matrix = self.copy()
         divisor = copy_matrix.first_nonzero_entry(row_index)
         for i in range(copy_matrix.num_cols): 
+            if divisor == None: 
+                return copy_matrix
             copy_matrix.elements[row_index][i] /= divisor
         return copy_matrix
         
@@ -238,3 +240,4 @@ class Matrix:
                 #print()
                 row_index += 1
         return determinant
+

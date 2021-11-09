@@ -71,5 +71,3 @@ class LinearRegressor:
         return round(prediction, 5)
 
 A = LinearRegressor()
-print(A.fit([[1, 2, 3, 4], [1, 1, 2, 0], [-1, -4,2, 0], [2, 3,6, 0], [1, 1,3, 0],[2, 2,3, 0] ], True))
-print(A.predict([1, 2, 2], True))
