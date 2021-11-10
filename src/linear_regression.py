@@ -55,12 +55,12 @@ class LinearRegressor:
             prediction += self.coefficents[i] * values[i -1]
     
         if interaction_terms == True: 
-            og_values_length = len(values)
+            original_values_length = len(values)
             interaction_values = []
             interaction_coeffs = self.coefficents[self.data_length:]
             
-            for i in range(0, og_values_length ):
-                for j in range(0, og_values_length):
+            for i in range(0, original_values_length ):
+                for j in range(0, original_values_length):
                     if i == i + j or i + j >= len(values): 
                             continue
                     interaction_values.append(values[i]*values[i+j])
