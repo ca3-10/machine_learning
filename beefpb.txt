@@ -1,6 +1,17 @@
+
 5 slices of beef no peanut butter
 6.24192
 
 5 slices of beef 5 tbsp on peanut butter 
 8.54032
 
+--------------------------
+INTERACTION TERMS 
+
+5 slices of beef no peanut butter
+8.13744
+
+5 slices of beef 5 tbsp on peanut butter 
+-4.54791
+
+Yes. Negative ratigns arent possibly since people are rating them 1-10.

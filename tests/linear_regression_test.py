@@ -27,4 +27,4 @@ assert C.predict([4]) == 0.24893
 assert D.predict([1, 1]) == 3.075
 assert E.predict([1, -2]) == 0.97655
 assert F.predict([1, 1,1], True) == 0.0625
-assert G.predict([1,1,1,1,1], True) == -54907.75
+assert G.predict([1,2,-1,1,1], True) == -54747.74 
