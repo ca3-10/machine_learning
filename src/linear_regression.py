@@ -40,7 +40,7 @@ class LinearRegressor:
         
         constants_values = coeff_inverse.matrix_multiply(y_values_matrix.elements)
         
-        self.coefficents = [round(constants_values.elements[i][0], 5) for i in range(0, constants_values.num_rows)]
+        self.coefficents = [constants_values.elements[i][0] for i in range(0, constants_values.num_rows)]
         return self.coefficents
     
     def predict(self,values, interaction_terms = False): 
@@ -49,7 +49,7 @@ class LinearRegressor:
         if len(values) != len(self.coefficents) - 1 and interaction_terms == False: 
             return "incorrect number of value entries"
         elif len(values) == 1 and len(self.coefficents)-1 == 1: 
-            return round(self.coefficents[0] + (values[0] * self.coefficents[1]), 5)
+            return self.coefficents[0] + (values[0] * self.coefficents[1])
        
         for i in range(1,self.data_length):
             prediction += self.coefficents[i] * values[i -1]
@@ -68,6 +68,6 @@ class LinearRegressor:
             for i in range(0, len(interaction_values)):
                 prediction += (interaction_values[i] * interaction_coeffs[i])
             
-        return round(prediction, 5)
+        return prediction
 
-A = LinearRegressor()
+
