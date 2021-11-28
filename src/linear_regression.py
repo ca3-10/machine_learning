@@ -70,4 +70,3 @@ class LinearRegressor:
             
         return prediction
 
-
