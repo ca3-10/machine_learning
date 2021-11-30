@@ -41,10 +41,20 @@ class DataFrame:
         for i in range(len(arr_of_dicts)): 
             for values in self.column_order:
                 arr_of_dicts[i][values] = self.data_dict[values][i]
-        return DataFrame(arr_of_dicts, column_order=self.column_order)
+        return arr_of_dicts
     
-    #@classmethod
-    #def from_json(json, column_order):
+    @classmethod
+    def from_json(cls,json, column_order):
+        dict = {}
+        for values in column_order: 
+            dict[values] = []
+            for i in range(0, len(json)-1):
+                dict[values].append(json[i][values])
+        print(dict)
+        return cls(dict, column_order = column_order)
+        
+
+        
 
 
     
@@ -55,8 +65,8 @@ df2 = df1.select_columns(["Sarah", "Pete"])
 df3 = df1.select_rows([1,3])
 
 columns = ['firstname', 'lastname', 'age']
-arr = [['Kevin', 'Fray', 5],['Charles', 'Trapp', 17],[
-    'Anna', 'Smith', 13],['Sylvia', 'Mendez', 9]]
+arr = [['Kevin', 'Fray', 5], ['Charles', 'Trapp', 17], ['Anna', 'Smith', 13], ['Sylvia', 'Mendez', 9]]
 df = DataFrame.from_array(arr, columns)
-print(df.to_json())
-
+json = df.to_json()
+df2 = DataFrame.from_json(json , column_order = ["firstname","lastname","age"])
+print(df2.to_array())
