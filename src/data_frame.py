@@ -26,7 +26,7 @@ class DataFrame:
             selected_rows.append(array[row])
         
         return DataFrame(selected_rows, self.column_order)
-    
+
     @classmethod
     def from_array(cls, arr, column_order):
         dict = {}
@@ -50,13 +50,12 @@ class DataFrame:
             dict[values] = []
             for i in range(0, len(json)-1):
                 dict[values].append(json[i][values])
-        print(dict)
         return cls(dict, column_order = column_order)
-        
-
-        
 
 
+
+
+    
     
 data_dict = {"Pete": [1, 0, 1, 0],"John": [2, 1, 0, 2],"Sarah": [3, 1, 4, 0]}
 df1 = DataFrame(data_dict,["John","Sarah", "Pete"])
@@ -66,7 +65,7 @@ df3 = df1.select_rows([1,3])
 
 columns = ['firstname', 'lastname', 'age']
 arr = [['Kevin', 'Fray', 5], ['Charles', 'Trapp', 17], ['Anna', 'Smith', 13], ['Sylvia', 'Mendez', 9]]
+
 df = DataFrame.from_array(arr, columns)
-json = df.to_json()
-df2 = DataFrame.from_json(json , column_order = ["firstname","lastname","age"])
-print(df2.to_array())
+gh = df.to_array()
+
