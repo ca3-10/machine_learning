@@ -9997,3 +9997,4 @@ Event.Id,Investigation.Type,Accident.Number,Event.Date,LOCATION,Country,Latitude
 20140922X90145,Accident,CEN14WA509,2014-09-17,"LE TOUGUET, FRANCE",France,,,LFAT,Le Touquet C??te d'Opale Airpor,Non-Fatal,Substantial,Airplane,N1027G,Maule,M 7-235B,No,1,Reciprocating,"Non-U.S., Non-Commercial",,Personal,,,,,2,VMC,Landing,Foreign,
 20140917X83320,Accident,ANC14CA084,2014-09-17,"CANTWELL, AK",United States,62.950833,-148.246666,,N/A,Non-Fatal,Substantial,Airplane,N1879P,Piper,PA 18-150,No,1,Reciprocating,Part 91: General Aviation,,Instructional,,,,,2,VMC,Takeoff,Probable Cause,09-10-2015
 20141029X71607,Incident,DCA15WA016B,2014-09-17,"Malaga, Spain",Spain,,,LEMG,Malaga,Incident,,Airplane,,Boeing Company,BOEING 737-8Z9,No,2,Turbo Fan,"Non-U.S., Commercial",SCHD,,,,,,2,,,Foreign,
+20141029X71607,Incident,DCA15WA016A,2014-09-17,"Malaga, Spain",Spain,,,LEMG,Malaga,Incident,,Airplane,,The Boeing Company,BOEING 737-8AS,No,2,,"Non-U.S., Commercial",SCHD,,,,,,2,,,Foreign,
