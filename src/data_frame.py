@@ -95,13 +95,3 @@ class DataFrame:
 
 
     
-data_dict = {"Pete": [1, 0, 1, 0],"John": [2, 1, 0, 2],"Sarah": [3, 1, 4, 0]}
-df1 = DataFrame(data_dict,["John","Sarah", "Pete"])
-df2 = df1.select_columns(["Sarah", "Pete"])
-df3 = df1.select_rows([1,3])
-df3.to_array()
-columns = ['firstname', 'lastname', 'age']
-arr = [['Kevin', 'Fray', 5], ['Charles', 'Trapp', 17], ['Anna', 'Smith', 13], ['Sylvia', 'Mendez', 9]]
-
-df = DataFrame.from_array(arr, columns)
-gh = df.order_by("firstname", ascending = False).to_array()
