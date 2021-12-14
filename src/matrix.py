@@ -85,6 +85,7 @@ class Matrix:
         #print()
         copy_matrix = self.copy()
         counter = 0
+
         if copy_matrix.num_rows != copy_matrix.num_cols: 
             return "not a valid input, matrix must be square"
             
@@ -106,8 +107,10 @@ class Matrix:
                 #print()
                 counter += 1
                 cofactor = coefficent_sign * coefficent * minor.calc_determinant()
+                #print(cofactor)
                 det += cofactor
-            return counter
+                #print(det)
+            return det
     
     def find_pivot_row(self, col_index):
         copy_matrix = self.copy()
@@ -243,9 +246,9 @@ class Matrix:
                 pivot_row = copy_matrix.find_pivot_row(col_index)
                 if pivot_row != row_index: 
                     copy_matrix.swap_rows(pivot_row, row_index)
-                    determinant *= -1 
+                    determinant *= -1
                 determinant *= copy_matrix.elements[row_index][col_index]
-                #print(copy_matrix.elements[row_index][col_index])
+                #print(determinant)
                 copy_matrix = copy_matrix.leading_entry_equals_one(row_index)
                 copy_matrix = copy_matrix.clear_below(row_index)
                 copy_matrix = copy_matrix.clear_above(row_index)

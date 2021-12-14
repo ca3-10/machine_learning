@@ -20,21 +20,28 @@ assert C.transpose().elements == [[1, 4], [2, 5], [3, 6]]
 assert D.transpose().elements == [[1, 3, 5], [2, 4, 6]]
 
 # add 
-assert A.add([[1, 1], [1, 1]]).elements == [[2, 3],[4, 5]]
-assert B.add([[1, 1, 1],[0, 1, 3], [1, 1, -2]]).elements == [[2, 1, -1], [3, 5, 8], [1, 1, -1]]
+A_add = Matrix([[1, 1], [1, 1]])
+B_add = Matrix([[1, 1, 1],[0, 1, 3], [1, 1, -2]])
+
+assert (A + A_add).elements == [[2, 3],[4, 5]]
+assert (B+B_add).elements == [[2, 1, -1], [3, 5, 8], [1, 1, -1]]
 
 # subtract
-assert C.subtract([[-1, -2,-3], [1, 1, 1]]).elements == [[2, 4, 6], [3, 4, 5]]
-assert D.subtract([[-2, -2], [-2, 0], [0, 1]]).elements == [[3, 4], [5, 4], [5, 5]]
+C_sub = Matrix([[-1, -2,-3], [1, 1, 1]])
+D_sub = Matrix([[-2, -2], [-2, 0], [0, 1]])
+assert (C - C_sub).elements == [[2, 4, 6], [3, 4, 5]]
+assert (D-D_sub).elements == [[3, 4], [5, 4], [5, 5]]
 
 
 # scalar_multiply
-assert A.scalar_multiply(-2).elements == [[-2, -4],[-6, -8]]
-assert B.scalar_multiply(0).elements == [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+assert (A * -2).elements and (-2 * A).elements == [[-2, -4],[-6, -8]]
+assert (B * 0).elements and (0 * B).elements == [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
 # matrix_multiply
-assert C.matrix_multiply([[2, 2], [2, 2], [1, 0]]).elements == [[9, 6], [24, 18]] 
-assert D.matrix_multiply([[1, -1], [0, 0]]).elements == [[1, -1], [3, -3], [5, -5]]
+C_multi = Matrix([[2, 2], [2, 2], [1, 0]])
+D_multi = Matrix([[1, -1], [0, 0]])
+assert (C @ C_multi).elements == [[9, 6], [24, 18]] 
+assert (D @ D_multi).elements == [[1, -1], [3, -3], [5, -5]]
 
 #determinant
 assert A.calc_determinant() == -2
@@ -63,9 +70,17 @@ assert C.inverse().elements == [["Only square matrices are invertible"]]
 assert D.inverse().elements == [["Only square matrices are invertible"]]
 
 #rref_determinant
-assert A.rref_det() == -2
+assert A.rref_det() == 2
 assert B.rref_det() ==  4
 assert C.rref_det() ==  "Cannot take the determinant of a nonsquare matrix"
 assert D.rref_det() ==  "Cannot take the determinant of a nonsquare matrix"
 assert F.rref_det() == -175
-assert J.rref_det() == 103776767478.00053
+
+#equality
+RE = Matrix([[0,0], [0,0]])
+RE1 = Matrix([[0,0],[0,0]])
+RE = RE1
+
+#exponentiation
+B_expo =  Matrix([[1, 0, -6], [63, 64, 69], [0,0,1]])
+(B ** 3).elements == B_expo.elements
