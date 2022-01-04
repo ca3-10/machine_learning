@@ -7,6 +7,9 @@ A = LogisticRegressor()
 B = LogisticRegressor()
 C = LogisticRegressor()
 D = LogisticRegressor()
+E = LogisticRegressor()
+
+print(E.fit([(0, 0.1), (0, 0.1), (0, 0.1)]))
 
 #fit 
 assert A.fit([(1, 0.2), (2, 0.25), (3, 0.5)]) == [2.2146, -0.69315]
