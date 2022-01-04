@@ -14,9 +14,10 @@ class LogisticRegressor:
             if data_matrix.elements[i][-1] <= 0: 
                 return "y values must be greater than 0 and less than 1"
         
+        self.max_bound = M
+        self.min_bound = m
         if M != 0 or m != 0:
-            self.max_bound = M
-            self.min_bound = m
+
             y_values_matrix = Matrix([[math.log(((M - data_matrix.elements[i][-1]) / data_matrix.elements[i][-1]) - m)] for i in range(0,data_matrix.num_rows)])
         else:
             y_values_matrix = Matrix([[math.log((1 / data_matrix.elements[i][-1]) - 1)] for i in range(0,data_matrix.num_rows)])
@@ -50,17 +51,17 @@ class LogisticRegressor:
         
         constants_values = coeff_inverse @ y_values_matrix
         self.coefficents = [constants_values.elements[i][0] for i in range(0, constants_values.num_rows)]
+
         return self.coefficents
     
-    def predict(self,values): 
+    def predict(self,values, interaction_terms = False ): 
 
         prediction = self.coefficents[0]
-        if len(values) != len(self.coefficents) - 1: 
-            return "incorrect number of value entries"
-        elif len(values) == 1 and len(self.coefficents)-1 == 1: 
+        
+        if len(values) == 1 and len(self.coefficents)-1 == 1: 
             return 1 / (1 + math.exp(self.coefficents[0] + (values[0] * self.coefficents[1])))
         
-        for i in range(1,len(self.coefficents)):
+        for i in range(1,self.data_length):
             prediction += self.coefficents[i] * values[i -1]
         
         if interaction_terms == True: 
@@ -79,5 +80,6 @@ class LogisticRegressor:
 
         if self.min_bound != 0 or self.max_bound != 0:
             return self.min_bound + ((self.max_bound - self.min_bound)/(1 + math.exp(prediction)))
+
         return (1 / (1 + math.exp(prediction)))
     
