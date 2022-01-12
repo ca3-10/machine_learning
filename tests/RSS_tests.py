@@ -42,9 +42,9 @@ def c_one_grad_pb(a,b,c):
 
 parobola_1 = RSS_parabola(1,0,0,a_one_grad_pb, b_one_grad_pb, c_one_grad_pb, learning_rate=0.00001, num_interations=1000000)
 
-assert round(parobola_1[0], 2) == -13.08
-assert round(parobola_1[1], 2) == 23.59
-assert round(parobola_1[2], 2) == 23.59
+assert round(parobola_1[0], 2) == -0.5
+assert round(parobola_1[1], 2) == 1.3
+assert round(parobola_1[2], 2) == 0.8
 
 
 #PARABOLA
@@ -59,9 +59,9 @@ def c_two_grad_pb(a,b,c):
 
 parobola_2 = RSS_parabola(1,0,0,a_two_grad_pb, b_two_grad_pb, c_two_grad_pb, learning_rate=0.0001, num_interations=1000000)
 
-assert round(parobola_2[0], 4) == 0.5837
-assert round(parobola_2[1], 4) == -0.7706
-assert round(parobola_2[2], 4) == -0.7702
+assert round(parobola_2[0], 2) == 0.18
+assert round(parobola_2[1], 2) == -0.27
+assert round(parobola_2[2], 2) == 1.34
 
 
 
