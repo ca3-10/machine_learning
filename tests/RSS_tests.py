@@ -31,37 +31,39 @@ assert round(line_two[1], 2) == 1.7
 
 #PARABOLA 
 
-def a_one_grad_pb(a,b,c): 
-    return ((196 * a) + (72 * b) + (28 * c) -26)
+def a_grad(a, b, c):
+    return 2*(a+b+c)+8*(4*a+2*b+c-1)+18*(9*a+3*b+c-1)
 
-def b_one_grad_pb(a,b,c): 
-    return ((72 * a) + (28 * b) + (12 * c) -10)
+def b_grad(a, b, c):
+    return 2*(a+b+c)+4*(4*a+2*b+c-1)+6*(9*a+3*b+c-1)
 
-def c_one_grad_pb(a,b,c): 
-    return ((28 * a) + (12 * b) + (8 * c) - 8)
+def c_grad(a, b, c):
+    return 2*(c-2)+2*(a+b+c)+2*(4*a+2*b+c-1)+2*(9*a+3*b+c-1)
 
-parobola_1 = RSS_parabola(1,0,0,a_one_grad_pb, b_one_grad_pb, c_one_grad_pb, learning_rate=0.00001, num_interations=1)
 
-assert round(parobola_1[0], 2) == 0.5
-assert round(parobola_1[1], 2) == -1.7
-assert round(parobola_1[2], 2) == 1.8
+parabola_1 = RSS_parabola(1,0,0,a_grad, b_grad, c_grad,0.00001,1000000)
+
+
+assert round(parabola_1[0], 2) == 0.5
+assert round(parabola_1[1], 2) == -1.7
+assert round(parabola_1[2], 2) == 1.8
 
 
 #PARABOLA
 def a_two_grad_pb(a,b,c): 
-    return ((196 * a) + (40 * b) + (28 * c) -62)
+    return 32 *((16 * a) + (4 * b) + c + 1) + 8 *((4 * a) + (2 * b) + c - 2)
 
 def b_two_grad_pb(a,b,c): 
-    return ((40 * a) + (28 * b) + (1 * c) -1)
+    return 8*(16 * a + 4 * b + c + 1) + 4*(4 * a + 2 * b + c - 2)
 
 def c_two_grad_pb(a,b,c): 
-    return ((28 * a) + (4 * b) + (6 * c) - 12)
+    return 2*(c+2) + 2*(16 * a + 4 * b + c + 1) + 2*(4 * a + 2 * b + c - 2) + 2 * c
 
-parobola_2 = RSS_parabola(1,0,0,a_two_grad_pb, b_two_grad_pb, c_two_grad_pb, learning_rate=0.0001, num_interations=1000000)
+parabola_2 = RSS_parabola(1,0,0,a_two_grad_pb, b_two_grad_pb, c_two_grad_pb, learning_rate=0.001, num_interations=1000000)
 
-assert round(parobola_2[0], 2) == 0.18
-assert round(parobola_2[1], 2) == -0.27
-assert round(parobola_2[2], 2) == 1.34
+assert round(parabola_2[0], 2) == -0.75
+assert round(parabola_2[1], 2) == 3
+assert round(parabola_2[2], 2) == -1
 
 
 
