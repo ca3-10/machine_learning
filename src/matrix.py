@@ -265,4 +265,3 @@ class Matrix:
             power -= 1
         return affect
         
-        

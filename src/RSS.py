@@ -1,4 +1,5 @@
 import math 
+
 def RSS_linear(a, b, a_gradient, b_gradient, learning_rate = 0.01, num_interations = 10000):
     a_old = a
     b_old = b 
@@ -35,3 +36,16 @@ def RSS_logistic(a, b, a_gradient, b_gradient, learning_rate = 0.01, num_interat
 
     return (a_new, b_new)
 
+
+def a_grad(a, b, c):
+    return 2*(a+b+c)+8*(4*a+2*b+c-1)+18*(9*a+3*b+c-1)
+
+def b_grad(a, b, c):
+    return 2*(a+b+c)+4*(4*a+2*b+c-1)+6*(9*a+3*b+c-1)
+
+def c_grad(a, b, c):
+    return 2*(c-2)+2*(a+b+c)+2*(4*a+2*b+c-1)+2*(9*a+3*b+c-1)
+
+E = RSS_parabola(1, 0, 0, a_grad, b_grad, c_grad, learning_rate=0.0087900003, num_interations=1000)
+
+print(E)
