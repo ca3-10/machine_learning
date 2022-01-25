@@ -46,6 +46,6 @@ def b_grad(a, b, c):
 def c_grad(a, b, c):
     return 2*(c-2)+2*(a+b+c)+2*(4*a+2*b+c-1)+2*(9*a+3*b+c-1)
 
-E = RSS_parabola(1, 0, 0, a_grad, b_grad, c_grad, learning_rate=0.0087900003, num_interations=1000)
+E = RSS_parabola(1, 0, 0, a_grad, b_grad, c_grad, learning_rate=0.0087900003, num_interations=1100)
 
 print(E)
