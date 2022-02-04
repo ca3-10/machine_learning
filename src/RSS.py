@@ -11,7 +11,7 @@ def RSS_linear(a, b, a_gradient, b_gradient, learning_rate = 0.01, num_interatio
 
     return (a_new, b_new)
 
-def RSS_parabola(a,b,c,a_gradient,b_gradient, c_gradient, learning_rate, num_interations):
+def RSS_parabola(a,b,c,a_gradient,b_gradient, c_gradient,rss, learning_rate, num_interations):
     a_old = a
     b_old = b
     c_old = c
@@ -23,6 +23,7 @@ def RSS_parabola(a,b,c,a_gradient,b_gradient, c_gradient, learning_rate, num_int
         a_old = a_new
         b_old = b_new
         c_old = c_new
+    
     return (a_old, b_old, c_old)    
 
 def RSS_logistic(a, b, a_gradient, b_gradient, learning_rate = 0.01, num_interations = 10000):
@@ -36,6 +37,9 @@ def RSS_logistic(a, b, a_gradient, b_gradient, learning_rate = 0.01, num_interat
 
     return (a_new, b_new)
 
+def rss(a,b,c): 
+    return ((c-2) ** 2) + ((a+b+c)**2) + ((4*a+2*b+c-1)**2)+(9*a+3*b+c-1)**2
+
 
 def a_grad(a, b, c):
     return 2*(a+b+c)+8*(4*a+2*b+c-1)+18*(9*a+3*b+c-1)
@@ -46,6 +50,6 @@ def b_grad(a, b, c):
 def c_grad(a, b, c):
     return 2*(c-2)+2*(a+b+c)+2*(4*a+2*b+c-1)+2*(9*a+3*b+c-1)
 
-E = RSS_parabola(1, 0, 0, a_grad, b_grad, c_grad, learning_rate=0.0087900003, num_interations=1100)
+E = RSS_parabola(1, 0, 0, a_grad, b_grad, c_grad,rss, learning_rate=0.0087900003, num_interations=1100)
 
 print(E)

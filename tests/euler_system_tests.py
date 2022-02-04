@@ -20,4 +20,10 @@ initial_point = (-0.4, initial_state)
 
 D = EulerEstimator(derivatives_1)
 F = D.calc_estimated_points(initial_point, step_size=2, num_steps=3)
+for i in range(0,10): 
+    print(D.calc_estimated_points(initial_point, step_size=2, num_steps=i))
 
+assert F[0] == 5.6
+assert round(F[1]['a'], 4) == 13.85 
+assert round(F[1]['b'], 4) == 2.35 
+assert round(F[1]['c'], 4) == 17.00

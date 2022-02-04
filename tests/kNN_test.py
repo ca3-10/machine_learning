@@ -1,7 +1,7 @@
 
 import sys
 sys.path.insert(1, sys.path[0].replace('tests', 'src'))
-from K import KNearestNeighborsClassifier
+from kNN import KNearestNeighborsClassifier
 
 
 x = [[ 0.14,       0.14,      0.28,     0.44],
