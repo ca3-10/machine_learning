@@ -1,3 +1,5 @@
+import math 
+
 
 class KMeans: 
 
@@ -23,8 +25,22 @@ class KMeans:
         initial_centers = {}
         for key in self.clusters: 
             initial_centers[key] = self.cluster_center_point(key)
+
+        distances = {}
+        for key in initial_centers: 
+            distances[key] = [0 for i in range(len(self.data))]
         
         for key in initial_centers: 
+            for i in range(len(self.data)): 
+                for j in range(len(self.data[0])):
+                    distances[key][i] += (initial_centers[key][j] - self.data[i][j]) ** 2
+        
+        for key in initial_centers: 
+            for i in range(len(initial_centers[key])): 
+                distances[key][i] = math.sqrt(distances[key][i])
+        
+        distances_from_all_centers = [[] for i in range(len(self.data))]
+                
             
         
                 
