@@ -17,7 +17,6 @@ class KMeans:
                 totals[j] += self.data[indicies][j]
         
         cluster_center = [totals[i]/len(cluster_indicies) for i in range(len(totals))]
-
         return cluster_center
 
     def run(self): 
@@ -25,21 +24,44 @@ class KMeans:
         initial_centers = {}
         for key in self.clusters: 
             initial_centers[key] = self.cluster_center_point(key)
+        
+        print(initial_centers)
 
         distances = {}
         for key in initial_centers: 
             distances[key] = [0 for i in range(len(self.data))]
-        
+        #sum
         for key in initial_centers: 
             for i in range(len(self.data)): 
                 for j in range(len(self.data[0])):
                     distances[key][i] += (initial_centers[key][j] - self.data[i][j]) ** 2
-        
+        #distances
         for key in initial_centers: 
             for i in range(len(initial_centers[key])): 
                 distances[key][i] = math.sqrt(distances[key][i])
         
         distances_from_all_centers = [[] for i in range(len(self.data))]
+
+        #distances for each point in list
+        for i in range(len(self.data)):
+            for key in initial_centers: 
+                distances_from_all_centers[i].append(distances[key][i])
+        
+        #index + 1 of the minimum 
+        indices = []
+        for entries in distances_from_all_centers: 
+            indices.append(entries.index(min(entries)))
+
+        dictionary_points = [num + 1 for num in indices ]
+        print(dictionary_points)
+
+        new_clusters = {}
+        for key in self.clusters: 
+            new_clusters[key] = []
+
+        print(new_clusters)
+
+
                 
             
         
