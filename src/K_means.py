@@ -21,11 +21,11 @@ class KMeans:
 
     def run(self): 
 
+
         initial_centers = {}
         for key in self.clusters: 
             initial_centers[key] = self.cluster_center_point(key)
         
-        print(initial_centers)
 
         distances = {}
         for key in initial_centers: 
@@ -53,13 +53,17 @@ class KMeans:
             indices.append(entries.index(min(entries)))
 
         dictionary_points = [num + 1 for num in indices ]
-        print(dictionary_points)
 
         new_clusters = {}
         for key in self.clusters: 
             new_clusters[key] = []
 
-        print(new_clusters)
+        for key in new_clusters: 
+            for i in range(len(dictionary_points)): 
+                if dictionary_points[i] == key: 
+                    new_clusters[key].append(i)
+        
+    
 
 
                 
@@ -94,4 +98,4 @@ clusters = {
     }
 
 k = KMeans(clusters, data_1)
-print(k.run())
+print(k.run(clusters))
