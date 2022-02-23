@@ -71,6 +71,10 @@ class KMeans:
             self.run()
         else: 
             return self.clusters
+    
+    #def elbow_method(self): 
+        
+        
         
 
 

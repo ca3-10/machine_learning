@@ -1,0 +1,9 @@
+SET 19 
+- all teenage people whose names do not start with a vowel, and order by oldest first:  https://sqltest.net/#1616520
+
+-full names of the people, along with their ages, in alphabetical order of last name: https://sqltest.net/#1616522
+
+SET 20 
+- average assignmnet score per student show full name order by highest: https://sqltest.net/#1616563
+
+-name, avg score, number of assignments order by avg : https://sqltest.net/#1616567

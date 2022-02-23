@@ -27,21 +27,21 @@ class LinearRegressor:
                         if m == m + n or m + n >= self.data_length: 
                             continue
                         rows.append(rows[m]*rows[m+n])
-                        
         
         coeff_matrix = Matrix(coeffs)
-        
         coeff_transpose = coeff_matrix.transpose()
 
-        y_values_matrix = coeff_transpose.matrix_multiply(y_values_matrix.elements)
+        y_values_matrix = coeff_transpose @ y_values_matrix.elements
 
-        coeff_matrix = coeff_transpose.matrix_multiply(coeff_matrix.elements)
+        coeff_matrix = coeff_transpose @ coeff_matrix.elements
         coeff_inverse = coeff_matrix.inverse()
         
-        constants_values = coeff_inverse.matrix_multiply(y_values_matrix.elements)
+        constants_values = coeff_inverse @ y_values_matrix
         
         self.coefficents = [constants_values.elements[i][0] for i in range(0, constants_values.num_rows)]
         return self.coefficents
+        
+        
     
     def predict(self,values, interaction_terms = False): 
         prediction = self.coefficents[0]
