@@ -29,19 +29,8 @@ class PolynomialRegressor:
     
     def predict(self, x_value): 
         prediction = 0
-        if len(self.coefficents) == 2: 
-            prediction += self.coefficents[0] + self.coefficents[1] * x_value
-            return prediction
-        for i in range(0,len(self.coefficents)-1):
-            print(i)
+        for i in range(0,len(self.coefficents)):
             prediction += self.coefficents[i] * ((x_value)**(i))
         return prediction
 
 
-data_points = [(1,3), (2,10), (3,40), (4,25), (5,90), (6,100), (7,180), (8,140), (9,250), (10,260)]
-
-#linear
-lin = PolynomialRegressor()
-lin.fit(data_points, 1)
-print(len(lin.coefficents))
-print(lin.predict(4))
