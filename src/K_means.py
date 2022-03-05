@@ -72,8 +72,25 @@ class KMeans:
         else: 
             return self.clusters
     
-    #def elbow_method(self): 
+    def elbow_method(self): 
+        k_values = [i for i in range(1,len(self.data))]
         
+        for k in k_values: 
+                initial_clusters = {i+1: [] for i in range(k)}
+                for key in initial_clusters:
+                    initial_clusters[key].append(self.data.index(rows))
+                print(initial_clusters)
+                initial_clusters = {}
+
+data = [[-1,2],[1,0],[2,4]]
+
+clusters = {
+    1: [0,2],
+    2: [1]
+    }
+
+k = KMeans(clusters, data)
+print(k.run())
         
         
 

@@ -41,6 +41,6 @@ assert round(euler_3_estimated[0], 1) == 0.9
 assert round(euler_3_estimated[1], 2) == 0.16
 
 
-
+def_deri
 
 

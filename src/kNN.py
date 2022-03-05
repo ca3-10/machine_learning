@@ -25,22 +25,17 @@ class KNearestNeighborsClassifier:
         for i in range(self.k):
             index_min_distance = distances.index(min(distances))
 
-
             classifications.append(y_copy[index_min_distance])
             distances.pop(index_min_distance)
-
-
+        
         no_repeating_values  = list(dict.fromkeys(classifications))
+
         counter = [0 for i in range(len(no_repeating_values))]
 
         for values in classifications: 
-            counter[no_repeating_values.index(values)] += 1 
-        
+            counter[no_repeating_values.index(values)] += 1
+
         index_max_value = counter.index(max(counter))
         closest = no_repeating_values[index_max_value]
-
         return closest
-        
-
-
         
