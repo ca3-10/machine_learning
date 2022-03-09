@@ -40,6 +40,7 @@ class Graph:
         return order 
 
     def depth_first(self, node): 
+        
         stack = Stack()
         stack.push(node)
         visited = {}
@@ -57,6 +58,9 @@ class Graph:
                 stack.push(child)
                 visited.update({child: True})
         return order 
+    
+    def calc_distance(self, starting_node, ending_node):
+
 
         
 
