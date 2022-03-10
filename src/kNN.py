@@ -10,6 +10,7 @@ class KNearestNeighborsClassifier:
         self.y = y
     
     def compute_distances(self, observation): 
+    
         distances = [0 for i in range(len(self.data))]
         for rows in self.data: 
             for i in range(len(self.data[0])):
@@ -20,12 +21,14 @@ class KNearestNeighborsClassifier:
     def classify(self, observation):
         distances = self.compute_distances(observation)
         y_copy = self.y
+
         k_nearest = []
         classifications = []
-        for i in range(self.k):
+        for i in range(0,self.k):
             index_min_distance = distances.index(min(distances))
 
             classifications.append(y_copy[index_min_distance])
+            
             distances.pop(index_min_distance)
         
         no_repeating_values  = list(dict.fromkeys(classifications))
