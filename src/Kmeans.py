@@ -65,16 +65,7 @@ class KMeans:
     
     def run(self):
         prev_clusters = {}
-        empty_clusters = []
         while prev_clusters != self.clusters:
-            prev_clusters = self.clusters
-            for cluster_index in list(self.clusters.keys()):
-                if len(self.clusters[cluster_index]) == 0:
-                    self.clusters.pop(cluster_index)
-                    empty_clusters.append(cluster_index)
             self.all_centers()
             self.reassign()
-        for index in empty_clusters:
-            self.clusters[index] = []
-
         
