@@ -8,37 +8,6 @@ class WeightedGraph(Graph):
         edges = [weight for weight in self.weights]
         super().__init__(edges)
     
-    def calc_distance(self, start_index, ending_index): 
-        for node_index in self.nodes:
-            if node_index == start_index: 
-                continue
-            else: 
-                self.nodes[node_index].distance = 99999
-
-        current_node_index = start_index
-        visited_nodes = []
-        distances = {}
-        
-        while current_node_index != ending_index: 
-        
-            if current_node_index in visited_nodes:
-                distances.pop(current_node)
-
-            visited_nodes.append(current_node_index)
-
-            for children_index in self.get_children(current_node_index): 
-                if current_node_index in visited_nodes: 
-                    continue
-                self.nodes[children_index].distance = min(self.nodes[children_index], self.nodes[current_node_index].distance + self.weights[(current_node_index, children_index)])
-                distances[children_index] = self.nodes[children_index].distance
-                print(distances)
-
-            min_distance_index = min(distances, key=distances.get)
-            current_node_index = min_distance_index
-
-        
-        return self.nodes[ending_index].distance
-    
     def calc_distance(self, start_index, ending_index):
         for node_index in self.nodes:
             if node_index == start_index: 
