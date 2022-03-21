@@ -1,12 +1,12 @@
 
 from stack_queue import *
 
-class Node: 
+class Node:
 
-    def __init__(self, index): 
+    def __init__(self, index):
         self.index = index
         self.distance = 0
-        self. previous = None
+        self.previous = None
     
 
 class Graph: 
@@ -14,9 +14,7 @@ class Graph:
     def __init__(self, edges): 
         self.edges = edges
         self.num_edges = len(edges)
-
         self.nodes = {}
-        self.parents_by_node = {}
         for edge in edges:
             if edge[0] not in self.nodes:
                 self.nodes[edge[0]] = Node(edge[0])
@@ -125,6 +123,7 @@ class Graph:
         shortest_path = []
         start_node_index = start_index
         current_node_index = ending_index
+    
         while current_node_index != start_node_index: 
             shortest_path.append(current_node_index)
             current_node_index = self.nodes[current_node_index].previous
@@ -132,5 +131,3 @@ class Graph:
 
         shortest_path = list(dict.fromkeys(shortest_path))
         return shortest_path[::-1]
-
-
