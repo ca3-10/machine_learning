@@ -6,7 +6,9 @@ from matrix import Matrix
 class LinearRegressor: 
     
     def fit(self, data, interaction_terms=False): 
+
         data_matrix = Matrix(data)
+        data_matrix.print()
         coeffs = []
         y_values_matrix = Matrix([[data_matrix.elements[i][data_matrix.num_cols - 1]] for i in range(0,data_matrix.num_rows)])
     
