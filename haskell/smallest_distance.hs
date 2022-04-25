@@ -1,0 +1,1 @@
+smallestDistance xs = [distance | (x,y,z) <- xs, let distance = sqrt(x^2 + y^2 + z^2), distance <= 10]
